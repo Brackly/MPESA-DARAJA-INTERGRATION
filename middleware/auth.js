@@ -1,0 +1,24 @@
+const axios = require('axios')
+require('dotenv').config();
+
+const authHandler = async (req, res, next) => {
+    const {consumerkey,consumersecret} = req.headers
+    const url = `${process.env.URL}/oauth/v1/generate?grant_type=client_credentials`
+    const buffer = new Buffer.from(consumerkey+":"+consumersecret);
+    const auth = `Basic ${buffer.toString('base64')}`;
+    try{
+        const {data} = await axios.get(url,{
+            "headers":{
+                "Authorization":auth
+            }
+        });
+         req.token = data['access_token'];
+        next()
+    }catch(err){
+        res.status(500).json({
+            error:err.message
+        });
+    }
+}
+
+module.exports = authHandler
