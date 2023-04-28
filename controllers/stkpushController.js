@@ -1,6 +1,7 @@
 const axios = require('axios')
 require('dotenv').config();
-const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+
+const url = `${process.env.URL}/mpesa/stkpush/v1/processrequest`
 
 const post = async (req, res) => {
   const {BusinessShortCode,TransactionType,Amount,PhoneNumber,AccountReference,TransactionDesc} = req.body
@@ -17,9 +18,8 @@ const post = async (req, res) => {
                 "AccountReference":AccountReference,    
                 "TransactionDesc":TransactionDesc
             }
-  console.log(data)
   try{
-      const {response} = await axios.post(
+      const {response} = await axios(
       {
         "method":"Post",
         "url":url,
@@ -30,15 +30,15 @@ const post = async (req, res) => {
         }
         
     });
-    console.log(data)
-    res.status(200).json(data)
+    res.status(200).json(response)
   }catch(err){
-      res.status(500).json({error:err.message})
+    console.log
+      res.status(500).json(err.message)
   }
   };
   
   const get = async (req, res) => {
-    res.status(200).json({message:"stkpush controller"})
+    res.status(200).json({message:req.token})
   };
   
   module.exports = {
