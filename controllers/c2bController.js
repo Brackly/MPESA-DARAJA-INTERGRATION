@@ -1,13 +1,37 @@
+const axios = require('axios')
+require('dotenv').config();
+const url = `${process.env.URL}/mpesa/c2b/v1/registerurl`
 
 const RegisterUrl = async (req, res) => {
-    res.status(200).json(req.body)
-  };
-  
-  const GetMpesaPayment = async (req, res) => {
-    res.status(200).json({message:"c2b controller"})
+  const {ShortCode,ResponseType,ConfirmationURL,ValidationURL} = req.body
+  if (!ResponseType){
+    ResponseType = "Completed"
+  }
+  const data=   {    
+                    "ShortCode": ShortCode,
+                    "ResponseType":ResponseType,
+                    "ConfirmationURL":ConfirmationURL,
+                    "ValidationURL":ValidationURL
+                }
+  try{
+      const {response} = await axios(
+      {
+        "method":"Post",
+        "url":url,
+        "data":data,
+        "headers":{
+          'Authorization': `Bearer ${req.token}`,
+          'Content-Type': 'application/json'
+        }
+        
+    });
+    res.status(200).json(response)
+  }catch(err){
+    console.log
+      res.status(500).json(err.message)
+  }
   };
   
   module.exports = {
-    RegisterUrl,
-    GetMpesaPayment,
-  };
+    RegisterUrl
+  }

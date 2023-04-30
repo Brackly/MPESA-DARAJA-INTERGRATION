@@ -10,10 +10,10 @@ const post = async (req, res) => {
                 "Password": process.env.PASSWORD,
                 "Timestamp":process.env.TIMESTAMP,    
                 "TransactionType": TransactionType,    
-                "Amount": Amount,    
-                "PartyA": PhoneNumber,    
-                "PartyB":BusinessShortCode,    
-                "PhoneNumber":PhoneNumber,    
+                "Amount": parseInt(Amount),    
+                "PartyA": parseInt(PhoneNumber),    
+                "PartyB": parseInt(BusinessShortCode),    
+                "PhoneNumber":parseInt(PhoneNumber), 
                 "CallBackURL": process.env.CALLBACK_URL,   
                 "AccountReference":AccountReference,    
                 "TransactionDesc":TransactionDesc
@@ -38,7 +38,7 @@ const post = async (req, res) => {
   };
   
   const get = async (req, res) => {
-    res.status(200).json({message:req.token})
+    res.status(200).json({message:"Stk push active"})
   };
   
   module.exports = {
