@@ -1,8 +1,6 @@
 const axios = require('axios')
 require('dotenv').config();
 
-const url = `${process.env.URL}/mpesa/b2c/v1/paymentrequest`
-
 const b2cController = async (req, res) => {
   const {InitiatorName,SecurityCredential,Amount,PhoneNumber,Paybill,Remarks,QueueTimeOutURL,ResultURL} = req.body
   
@@ -22,7 +20,7 @@ const b2cController = async (req, res) => {
       const {data} = await axios(
       {
         "method":"Post",
-        "url":url,
+        "url":req.endpoint_url,
         "data":data,
         "headers":{
           'Authorization': `Bearer ${req.token}`,

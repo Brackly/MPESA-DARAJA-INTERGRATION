@@ -1,7 +1,5 @@
 const axios = require('axios')
 require('dotenv').config();
-const url = `${process.env.URL}/mpesa/c2b/v1/registerurl`
-
 const RegisterUrl = async (req, res) => {
   const {ShortCode,ResponseType,ConfirmationURL,ValidationURL} = req.body
   if (!ResponseType){
@@ -17,7 +15,7 @@ const RegisterUrl = async (req, res) => {
       const {response} = await axios(
       {
         "method":"Post",
-        "url":url,
+        "url":req.endpoint_url,
         "data":data,
         "headers":{
           'Authorization': `Bearer ${req.token}`,

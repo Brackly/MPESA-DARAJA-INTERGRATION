@@ -1,9 +1,14 @@
 const axios = require('axios')
 require('dotenv').config();
-
+let url
 const authHandler = async (req, res, next) => {
-    const {consumerkey,consumersecret} = req.headers
-    const url = `${process.env.URL}/oauth/v1/generate?grant_type=client_credentials`
+    const {consumerkey,consumersecret,environment} = req.headers
+    if(environment=='production'){
+         req.endpoint_url = `${process.env.PROD_URL}/oauth/v1/generate?grant_type=client_credentials`
+    }else{
+        req.endpoint_url = `${process.env.DEV_URL}/oauth/v1/generate?grant_type=client_credentials`
+    }
+    
     const buffer = new Buffer.from(consumerkey+":"+consumersecret);
     const auth = `Basic ${buffer.toString('base64')}`;
     try{

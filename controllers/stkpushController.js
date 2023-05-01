@@ -1,20 +1,19 @@
 const axios = require('axios')
 require('dotenv').config();
-
-const url = `${process.env.URL}/mpesa/stkpush/v1/processrequest`
-
 const post = async (req, res) => {
-  const {BusinessShortCode,TransactionType,Amount,PhoneNumber,AccountReference,TransactionDesc} = req.body
+  const {BusinessShortCode,TransactionType,Amount,PhoneNumber,AccountReference,callBackURL,TransactionDesc} = req.body
+  const {password,timestamp} =req.headers
+  console.log(req.endpoint_url)
   const data= {    
                 "BusinessShortCode": BusinessShortCode,    
-                "Password": process.env.PASSWORD,
-                "Timestamp":process.env.TIMESTAMP,    
+                "Password": password,
+                "Timestamp":timestamp,
                 "TransactionType": TransactionType,    
                 "Amount": parseInt(Amount),    
                 "PartyA": parseInt(PhoneNumber),    
                 "PartyB": parseInt(BusinessShortCode),    
                 "PhoneNumber":parseInt(PhoneNumber), 
-                "CallBackURL": process.env.CALLBACK_URL,   
+                "CallBackURL": callBackURL,   
                 "AccountReference":AccountReference,    
                 "TransactionDesc":TransactionDesc
             }
@@ -22,7 +21,7 @@ const post = async (req, res) => {
       const {response} = await axios(
       {
         "method":"Post",
-        "url":url,
+        "url":req.endpoint_url,
         "data":data,
         "headers":{
           'Authorization': `Bearer ${req.token}`,
