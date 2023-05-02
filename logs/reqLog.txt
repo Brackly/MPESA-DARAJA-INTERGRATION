@@ -22733,3 +22733,6 @@
 20230502	14:17:30	ae7d21ab-d7f8-4446-be91-7a0644ab2138	GET	undefined	/api-docs/swagger-ui-init.js
 20230502	14:17:30	79ac4221-896b-4ff1-9359-6447d934ade6	GET	undefined	/api-docs/favicon-32x32.png
 20230502	14:18:09	a5dd357c-70eb-4d2a-9978-30dc2462654f	POST	http://localhost:3500	/b2c
+20230502	15:49:32	f82c89a9-085d-44ec-9749-b4152b07e782	POST	http://localhost:3500	/stkpush
+20230502	16:46:55	9353c188-1326-481e-85aa-4f9a66e26755	GET	undefined	/
+20230502	16:46:55	e88267eb-9f14-44d6-ab6c-a340ad474e39	GET	undefined	/favicon.ico
