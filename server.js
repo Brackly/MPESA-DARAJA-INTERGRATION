@@ -8,6 +8,10 @@ const errorHandler = require("./middleware/errorHandler");
 const credentials = require("./middleware/credentials");
 const authHandler = require('./middleware/auth')
 const PORT = process.env.PORT || 3500;
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+fs = require('fs');
+const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
 
 // custom middleware logger
 app.use(logger);
@@ -32,6 +36,7 @@ app.use("/", express.static(path.join(__dirname, "/public")));
 
 // routes
 app.use("/", require("./routes/root"));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 app.use(authHandler)
 app.use("/b2c", require("./routes/api/b2c"));
 app.use("/c2b", require("./routes/api/c2b"));

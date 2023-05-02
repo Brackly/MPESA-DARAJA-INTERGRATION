@@ -1,0 +1,346 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a NodeJS API mpesa integration Service Swagger Documentation",
+        "version": "1.0.0",
+        "title": "Daraja Node API",
+        "contact": {
+            "email": "khanbrackly@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http","https"],
+    "host": "localhost:3500",
+    "basePath": "/",
+    "paths" : {
+        "/stkpush" : {
+            "post" : {
+                "summary" : "Save the task",
+                "description": "Save the task",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "consumerkey",
+                        "description": "Consumer Key from the daraja Portal",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "password",
+                        "description": "Password from the Daraja Portal",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "timestamp",
+                        "description": "Timestamp from the Daraja Portal",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "consumersecret",
+                        "description": "Consumer Secret from the Daraja Portal",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "environment",
+                        "description": "The environment prod/dev",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "task object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/stkPushBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/stkpushResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/b2c" : {
+            "post" : {
+                "summary" : "Save the task",
+                "description": "Save the task",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "consumerkey",
+                        "description": "Consumer Key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "consumersecret",
+                        "description": "Consumer Secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "task object",
+                        "required": true,
+                        "schema": {
+                             "$ref": "#/definitions/b2cBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/b2cResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/c2b" : {
+            "post" : {
+                "summary" : "Save the task",
+                "description": "Save the task",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "consumerkey",
+                        "description": "Consumer Key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "consumersecret",
+                        "description": "Consumer Secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "task object",
+                        "required": true,
+                        "schema": {
+                                    "$ref": "#/definitions/c2bBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                                "$ref": "#/definitions/c2bResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }
+    }, 
+    "definitions": {
+        "b2cResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                     "type": "object",
+                     "properties": {
+                        "ConversationID": {
+                            "type": "string"
+                        },
+                        "OriginatorConversationID": {
+                            "type": "string"
+                        },
+                        "ResponseCode": {
+                            "type": "string"
+                        },
+                        "ResponseDescriptionj": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "stkpushResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                     "type": "object",
+                     "properties": {
+                        "MerchantRequestID": {
+                            "type": "string"
+                        },
+                        "CheckoutRequestID": {
+                            "type": "string"
+                        },
+                        "ResponseCode": {
+                            "type": "string"
+                        },
+                        "ResponseDescriptionj": {
+                            "type": "string"
+                        },
+                        "CustomerMessage": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "c2bResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                     "type": "object",
+                     "properties": {
+                        "MerchantRequestID": {
+                            "type": "string"
+                        },
+                        "CheckoutRequestID": {
+                            "type": "string"
+                        },
+                        "ResponseCode": {
+                            "type": "string"
+                        },
+                        "ResponseDescriptionj": {
+                            "type": "string"
+                        },
+                        "CustomerMessage": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "stkPushBody": {
+            "type": "object",
+            "properties": {
+                "BusinessShortCode": {
+                    "type": "integer"
+                },
+                "TransactionType": {
+                    "type": "string"
+                },
+                "Amount": {
+                    "type": "integer"
+                },
+                "PhoneNumber": {
+                    "type": "integer"
+                },
+                "AccountReference": {
+                    "type": "string"
+                },
+                "callBackURL": {
+                    "type": "string"
+                },
+                "TransactionDesc": {
+                    "type": "string"
+                }
+            }
+        },
+        "b2cBody": {
+            "type": "object",
+            "properties": {
+                "InitiatorName": {
+                    "type": "string"
+                },
+                "SecurityCredential": {
+                    "type": "string"
+                },
+                "CommandID": {
+                    "type": "string"
+                },
+                "Amount": {
+                    "type": "integer"
+                },
+                "PhoneNumber": {
+                    "type": "integer"
+                },
+                "Paybill": {
+                    "type": "integer"
+                },
+                "Remarks": {
+                    "type": "string"
+                },
+                "QueueTimeOutURL": {
+                    "type": "string"
+                },
+                "ResultURL": {
+                    "type": "string"
+                },
+                "Occasion": {
+                    "type": "string"
+                }
+            }
+        },
+        "c2bBody": {
+            "type": "object",
+            "properties": {
+                "ShortCode": {
+                    "type": "integer"
+                },
+                "ResponseType": {
+                    "type": "string"
+                },
+                "ConfirmationURL": {
+                    "type": "string"
+                },
+                "ValidationURL": {
+                    "type": "string"
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+
+        }
+    }
+}

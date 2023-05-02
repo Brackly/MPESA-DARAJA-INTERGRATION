@@ -3,7 +3,7 @@ const router = express.Router();
 const stkpushController = require('../../controllers/stkpushController');
 
 router.route('/')
-    .post( stkpushController.post)
+    .post(stkpushController.post)
     .get(stkpushController.get);
     
 
