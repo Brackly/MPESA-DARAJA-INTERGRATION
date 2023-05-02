@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const b2cController = async (req, res) => {
   const {InitiatorName,SecurityCredential,Amount,PhoneNumber,Paybill,Remarks,QueueTimeOutURL,ResultURL} = req.body
-  
+  const url = `${req.endpoint_url}/mpesa/b2c/v1/paymentrequest`
   const data= {
                 "InitiatorName": InitiatorName,
                 "SecurityCredential": SecurityCredential,
@@ -17,10 +17,10 @@ const b2cController = async (req, res) => {
                 "Occassion": "",
               }
   try{
-      const {data} = await axios(
+      const response = await axios(
       {
         "method":"Post",
-        "url":req.endpoint_url,
+        "url":url,
         "data":data,
         "headers":{
           'Authorization': `Bearer ${req.token}`,
@@ -28,8 +28,7 @@ const b2cController = async (req, res) => {
         }
         
     });
-    console.log(data)
-    res.status(200).json(data)
+    res.status(response.status).json({'response':response.data})
   }catch(err){
     console.log
       res.status(500).json(err.message)

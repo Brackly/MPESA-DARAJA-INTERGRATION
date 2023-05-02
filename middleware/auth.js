@@ -4,11 +4,11 @@ let url
 const authHandler = async (req, res, next) => {
     const {consumerkey,consumersecret,environment} = req.headers
     if(environment=='production'){
-         req.endpoint_url = `${process.env.PROD_URL}/oauth/v1/generate?grant_type=client_credentials`
+         req.endpoint_url = process.env.PROD_URL
     }else{
-        req.endpoint_url = `${process.env.DEV_URL}/oauth/v1/generate?grant_type=client_credentials`
+        req.endpoint_url = process.env.DEV_URL
     }
-    
+    url = `${req.endpoint_url}/oauth/v1/generate?grant_type=client_credentials`
     const buffer = new Buffer.from(consumerkey+":"+consumersecret);
     const auth = `Basic ${buffer.toString('base64')}`;
     try{
