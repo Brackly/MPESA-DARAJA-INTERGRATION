@@ -17,6 +17,7 @@ const post = async (req, res) => {
                 "AccountReference":AccountReference,    
                 "TransactionDesc":TransactionDesc
             }
+  console.log(req.body)
   try{
       response = await axios(
       {
@@ -31,8 +32,7 @@ const post = async (req, res) => {
     });
     res.status(response.status).json({'response':response.data})
   }catch(err){
-    console.log("req")
-    res.status(500).json(req)
+    res.status(500).json(err)
   }
   };
   

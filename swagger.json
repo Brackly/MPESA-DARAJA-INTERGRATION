@@ -13,7 +13,7 @@
         }
     },
     "schemes": ["http","https"],
-    "host": "localhost:3500",
+    "host": "brackly-bookish-space-barnacle-vjwxq5x44qqhxxxw-3500.preview.app.github.dev",
     "basePath": "/",
     "paths" : {
         "/stkpush" : {
