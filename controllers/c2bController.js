@@ -32,7 +32,16 @@ const RegisterUrl = async (req, res) => {
       res.status(500).json(err)
   }
   };
+
+const callback = async (req,res) => {
+    try{
+      res.status(200).json(req.body)
+    }catch(err){
+      console.log(err)
+    }
+  };
   
   module.exports = {
-    RegisterUrl
+    RegisterUrl,
+    callback
   }
