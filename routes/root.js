@@ -9,5 +9,7 @@ router.route('/')
 
 router.route('/callback')
     .post(c2bController.callback)
+router.route('/validation')
+    .post(c2bController.validation)
 
 module.exports = router;
