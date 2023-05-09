@@ -7,9 +7,9 @@ router.route('/')
       res.status(200).json({'message':'This is the Mpesa integration service '})
 })
 
-router.route('/callback')
-    .post(c2bController.callback)
 router.route('/validation')
     .post(c2bController.validation)
+router.route('/callback')
+    .post(c2bController.callback)
 
 module.exports = router;
