@@ -9,13 +9,14 @@ const b2cController = async (req, res) => {
                 "SecurityCredential": SecurityCredential,
                 "CommandID": "BusinessPayment",
                 "Amount": parseInt(Amount),
-                "PartyA": parseInt(PhoneNumber),
-                "PartyB": parseInt(Paybill),
+                "PartyA": parseInt(Paybill),
+                "PartyB": parseInt(PhoneNumber),
                 "Remarks": Remarks,
                 "QueueTimeOutURL": QueueTimeOutURL,
                 "ResultURL": ResultURL,
                 "Occassion": "",
               }
+  console.log()
   try{
       const response = await axios(
       {
@@ -28,10 +29,11 @@ const b2cController = async (req, res) => {
         }
         
     });
+    console.log(response)
     res.status(response.status).json({'response':response.data})
   }catch(err){
     console.log
-      res.status(500).json(err.message)
+      res.status(500).json(err)
   }
   };
 

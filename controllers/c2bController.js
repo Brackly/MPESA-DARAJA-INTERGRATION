@@ -36,126 +36,51 @@ const RegisterUrl = async (req, res) => {
   // Callback url
 const callback = async (req,res) => {
   const {TransAmount,BusinessShortCode,BillRefNumber,TransTime} = req.body
-    const req_data = {
-                    "acknowledgedBy": "string",
-                    "acknowledgedFlag": "string",
-                    "acknowledgedTime": "2023-05-09T08:40:25.211Z",
-                    "approvalSentBy": "string",
-                    "approvalSentFlag": "string",
-                    "approvalSentTime": "2023-05-09T08:40:25.211Z",
-                    "approvalSentTo": "string",
-                    "batchCode": "string",
-                    "chargeEventId": "string",
-                    "chargePartran": [
-                      {
-                        "accountBalance": 0,
-                        "accountType": "string",
-                        "acid": "string",
-                        "currency": "string",
-                        "exchangeRate": "string",
-                        "isoFlag": "string",
-                        "partTranType": "string",
-                        "sn": 0,
-                        "transactionAmount": 0,
-                        "transactionDate": "2023-05-09T08:40:25.211Z",
-                        "transactionParticulars": "string"
-                      }
-                    ],
-                    "chequeInstruments": [
-                      {
-                        "instrumentDate": "2023-05-09T08:40:25.211Z",
-                        "instrumentNo": "string",
-                        "instrumentType": "string",
-                        "leafNo": 0,
-                        "sn": 0
-                      }
-                    ],
-                    "chequeType": "string",
-                    "conductedBy": "string",
-                    "currency": "string",
-                    "deletedBy": "string",
-                    "deletedFlag": "string",
-                    "deletedTime": "2023-05-09T08:40:25.211Z",
-                    "enteredBy": "string",
-                    "enteredFlag": "string",
-                    "enteredTime": "2023-05-09T08:40:25.211Z",
-                    "entityId": "string",
-                    "eodStatus": "string",
-                    "modifiedBy": "string",
-                    "modifiedFlag": "string",
-                    "modifiedTime": "2023-05-09T08:40:25.211Z",
-                    "mpesacode": "string",
-                    "partTrans": [
-                      {
-                        "accountBalance": 0,
-                        "accountType": "string",
-                        "acid": "string",
-                        "batchCode": "string",
-                        "chargeFee": "string",
-                        "currency": "string",
-                        "exchangeRate": "string",
-                        "isWelfare": true,
-                        "isoFlag": "string",
-                        "partTranType": "string",
-                        "parttranIdentity": "string",
-                        "sn": 0,
-                        "transactionAmount": 0,
-                        "transactionCode": "string",
-                        "transactionDate": "2023-05-09T08:40:25.211Z",
-                        "transactionParticulars": "string",
-                        "welfareAction": "string",
-                        "welfareCode": "string",
-                        "welfareMemberCode": "string"
-                      }
-                    ],
-                    "postedBy": "string",
-                    "postedFlag": "string",
-                    "postedTime": "2023-05-09T08:40:25.211Z",
-                    "rejectedBy": "string",
-                    "rejectedFlag": "string",
-                    "rejectedReason": "string",
-                    "rejectedTime": "2023-05-09T08:40:25.211Z",
-                    "reversalPostedFlag": "string",
-                    "reversalTransactionCode": "string",
-                    "reversedBy": "string",
-                    "reversedFlag": "string",
-                    "reversedTime": "2023-05-09T08:40:25.211Z",
-                    "reversedWithTransactionCode": "string",
-                    "salaryuploadCode": "string",
-                    "sn": 0,
-                    "staffCustomerCode": "string",
-                    "status": "string",
-                    "tellerAccount": "string",
-                    "totalAmount": 0,
-                    "transactionCode": "string",
-                    "transactionDate": "2023-05-09T08:40:25.211Z",
-                    "transactionType": "string",
-                    "verifiedBy": "string",
-                    "verifiedBy_2": "string",
-                    "verifiedFlag": "string",
-                    "verifiedFlag_2": "string",
-                    "verifiedTime": "2023-05-09T08:40:25.211Z",
-                    "verifiedTime_2": "2023-05-09T08:40:25.211Z"
-                  }
-
-    try{
-      const {data} = await axios(
-        {
-          "method":"Post",
-          "url": process.env.TRANSACTION_URL,
-          "data":req_data,
-          "headers":{
-            'Content-Type': 'application/json',
-            "userName": process.env.USERNAME,
-            "accept": "*/*",
-            "entityId": process.env.ENTITY_ID
-          }
-          
-      });
-      res.status(data.status).json(data);
-    }catch(err){
-      console.log(err)
-    }
+  
+  const req_data = {
+    "currency": "KES",
+    "entityId": "001",
+    "transactionDate": "2023-05-03T10:53:23.853Z",
+    "partTrans": [
+      {
+        "accountType": "string",
+        "acid": BillRefNumber,
+        "partTranType": "Debit",
+        "transactionAmount": TransAmount,
+        "transactionDate": "2023-05-03T10:53:23.853Z",
+        "transactionParticulars": "string"
+      },
+    {
+        "accountType": "string",
+        "acid": "270000",
+        "partTranType": "Credit",
+        "transactionAmount": TransAmount,
+        "transactionDate": "2023-05-03T10:53:23.853Z",
+        "transactionParticulars": "string"
+      }
+    ],
+    "transactionType": "Transfer",
+    "totalAmount": TransAmount
+  }
+  
+  try{
+    const {data} = await axios(
+      {
+        "method":"Post",
+        "url": process.env.TRANSACTION_URL,
+        "data":req_data,
+        "headers":{
+          'Content-Type': 'application/json',
+          "userName": process.env.USERNAME,
+          "accept": "*/*",
+          "entityId": process.env.ENTITY_ID
+        }
+        
+    });
+    res.status(data.statusCode).json(data);
+  }catch(err){
+    console.log(err.message)
+  }
   };
 
 

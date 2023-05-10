@@ -20,9 +20,9 @@ const authHandler = async (req, res, next) => {
          req.token = data['access_token'];
         next()
     }catch(err){
-        res.status(500).json({
-            error:err.message
-        });
+        res.status(500).json(
+            err
+        );
     }
 }
 
