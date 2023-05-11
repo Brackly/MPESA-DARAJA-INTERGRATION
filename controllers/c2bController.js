@@ -81,8 +81,11 @@ const RegisterUrl = async (req, res) => {
 
   // Callback url
 const callback = async (req,res) => {
-  const {TransAmount,BillRefNumber} = req.body
+  const {Body} = req.body
+  if(Body.stkCallback.ResultCode==0)
+  {
   let Reconciled=false;
+  const TransAmount=Body.stkCallback.CallbackMetadata.Item[0].Value
   const req_data = {
     "currency": "KES",
     "entityId": "001",
@@ -128,6 +131,7 @@ const callback = async (req,res) => {
   }catch(err){
     insertPayment(req.body,Reconciled);
     res.status(200).json({message:"Transaction saved but not reconciled"})
+  }
   }
   };
 
