@@ -52,7 +52,7 @@ const RegisterUrl = async (req, res) => {
   const url = `${req.endpoint_url}/mpesa/c2b/v1/registerurl`
   const {ShortCode,ResponseType,ConfirmationURL,ValidationURL} = req.body
   if (!ResponseType){
-    ResponseType = "Completed"
+    ResponseType = "Cancelled"
   }
   const data =   {    
                     "ShortCode": ShortCode,
@@ -60,6 +60,7 @@ const RegisterUrl = async (req, res) => {
                     "ConfirmationURL":ConfirmationURL,
                     "ValidationURL":ValidationURL
                 }
+  console.log(data)
   try{
     const response = await axios(
       {
@@ -74,7 +75,6 @@ const RegisterUrl = async (req, res) => {
     });
     res.status(response.status).json(response.data)
   }catch(err){
-    console.log
       res.status(500).json(err)
   }
   };
