@@ -1,0 +1,73 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Test",
+    "dateExported": "2023-05-23T08:16:11.416Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "690c8b63-0768-4d5a-9414-a428808dec28",
+            "colId": "eafaa908-f9a0-43b9-b632-3488d86e2183",
+            "containerId": "",
+            "name": "c2b register",
+            "url": "localhost:3500/c2b/registerUrl/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-23T06:50:25.876Z",
+            "modified": "2023-05-23T07:39:46.491Z",
+            "headers": [
+                {
+                    "name": "consumerkey",
+                    "value": "yUOMUd61AKY9TTOaQVV4RQCKpB6oPV6I"
+                },
+                {
+                    "name": "consumersecret",
+                    "value": "era6I6XUfVIApPtA"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n    \"ShortCode\": \"600981\",\r\n    \"ResponseType\": \"Completed\",\r\n    \"ConfirmationURL\": \"https://fusure.africa/confirm\",\r\n    \"ValidationURL\": \"https://fusure.africa/validate\"\r\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "24a6c0d6-ca33-4a51-85d1-00fbe3253fd8",
+            "colId": "eafaa908-f9a0-43b9-b632-3488d86e2183",
+            "containerId": "",
+            "name": "stkpush",
+            "url": "localhost:3500/stkpush",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-05-23T07:40:38.046Z",
+            "modified": "2023-05-23T08:11:58.184Z",
+            "headers": [
+                {
+                    "name": "password",
+                    "value": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjMwNDI3MTcyMjM3"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "20230427172237"
+                },
+                {
+                    "name": "consumerkey",
+                    "value": "yUOMUd61AKY9TTOaQVV4RQCKpB6oPV6I"
+                },
+                {
+                    "name": "consumersecret",
+                    "value": "era6I6XUfVIApPtA"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"BusinessShortCode\": 174379,\r\n  \"TransactionType\": \"CustomerPayBillOnline\",\r\n  \"Amount\": 1,\r\n  \"PhoneNumber\":254741806859,\r\n  \"AccountReference\": \"CompanyXLTD\",\r\n  \"callBackURL\": \"https://x.com/callback\",\r\n  \"TransactionDesc\": \"payment of x\"\r\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
