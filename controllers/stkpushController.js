@@ -13,15 +13,15 @@ const post = async (req, res) => {
   const { password, timestamp } = req.headers;
   const url = `${req.endpoint_url}/mpesa/stkpush/v1/processrequest`;
   const data = {
-    BusinessShortCode: BusinessShortCode,
-    Password: password,
-    Timestamp: timestamp,
-    TransactionType: TransactionType,
+    BusinessShortCode: 174379,
+    Password: "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjMwNzIwMTk1MDM2",
+    Timestamp: "20230720195036",
+    TransactionType: "CustomerPayBillOnline",
     Amount: parseInt(Amount),
     PartyA: parseInt(PhoneNumber),
     PartyB: parseInt(BusinessShortCode),
-    PhoneNumber: parseInt(PhoneNumber),
-    CallBackURL: callBackURL,
+    PhoneNumber: 174379,
+    CallBackURL: callbackUrl,
     AccountReference: AccountReference,
     TransactionDesc: TransactionDesc,
   };
