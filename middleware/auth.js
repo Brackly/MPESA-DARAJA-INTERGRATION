@@ -2,7 +2,10 @@ const axios = require("axios");
 require("dotenv").config();
 let url;
 const authHandler = async (req, res, next) => {
-  const { consumerkey, consumersecret, environment } = req.headers;
+  const consumerkey=process.env.CONSUMERKEY
+  const consumersecret=process.env.CONSUMERSECRET
+  const environment="dev"
+
   if (environment == "production") {
     req.endpoint_url = process.env.PROD_URL;
   } else {

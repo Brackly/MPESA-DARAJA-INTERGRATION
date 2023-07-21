@@ -78,57 +78,7 @@ const RegisterUrl = async (req, res) => {
 };
 
 // Callback url
-const callback = async (req, res) => {
-  const { Body } = req.body;
-  if (Body.stkCallback.ResultCode == 0) {
-    let Reconciled = false;
-    const TransAmount = Body.stkCallback.CallbackMetadata.Item[0].Value;
-    const req_data = {
-      currency: "KES",
-      entityId: "001",
-      transactionDate: createTime(),
-      partTrans: [
-        {
-          accountType: "string",
-          acid: BillRefNumber,
-          partTranType: "Debit",
-          transactionAmount: TransAmount,
-          transactionDate: createTime(),
-          transactionParticulars: "string",
-        },
-        {
-          accountType: "string",
-          acid: "270000",
-          partTranType: "Credit",
-          transactionAmount: TransAmount,
-          transactionDate: createTime(),
-          transactionParticulars: "string",
-        },
-      ],
-      transactionType: "Transfer",
-      totalAmount: TransAmount,
-    };
-    try {
-      const response = await axios({
-        method: "Post",
-        url: process.env.TRANSACTION_URL,
-        data: req_data,
-        headers: {
-          "Content-Type": "application/json",
-          userName: process.env.USERNAME,
-          accept: "*/*",
-          entityId: process.env.ENTITY_ID,
-        },
-      });
-      Reconciled = true;
-      insertPayment(req.body, Reconciled);
-      res.status(200).json({ message: "Transaction saved and reconciled" });
-    } catch (err) {
-      insertPayment(req.body, Reconciled);
-      res.status(200).json({ message: "Transaction saved but not reconciled" });
-    }
-  }
-};
+
 
 // Validation url
 const validation = async (req, res) => {
@@ -163,6 +113,5 @@ const validation = async (req, res) => {
 
 module.exports = {
   RegisterUrl,
-  callback,
   validation,
 };

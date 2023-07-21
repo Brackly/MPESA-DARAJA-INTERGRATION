@@ -1,29 +1,29 @@
 const axios = require("axios");
+const moment = require("moment-timezone");
+const createTime = () => {
+  const now = moment().tz("Africa/Nairobi");
+  return now.toISOString();
+};
 require("dotenv").config();
 const post = async (req, res) => {
+  let result={}
   const {
-    BusinessShortCode,
-    TransactionType,
     Amount,
     PhoneNumber,
-    AccountReference,
-    callBackURL,
-    TransactionDesc,
   } = req.body;
-  const { password, timestamp } = req.headers;
   const url = `${req.endpoint_url}/mpesa/stkpush/v1/processrequest`;
   const data = {
     BusinessShortCode: 174379,
-    Password: "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjMwNzIwMTk1MDM2",
-    Timestamp: "20230720195036",
+    Password: process.env.PASSWORD,
+    Timestamp: process.env.TIMESTAMP,
     TransactionType: "CustomerPayBillOnline",
     Amount: parseInt(Amount),
     PartyA: parseInt(PhoneNumber),
-    PartyB: parseInt(BusinessShortCode),
-    PhoneNumber: 174379,
-    CallBackURL: callbackUrl,
-    AccountReference: AccountReference,
-    TransactionDesc: TransactionDesc,
+    PartyB: 174379,
+    PhoneNumber: parseInt(PhoneNumber),
+    CallBackURL: "https://brackly-supreme-goggles-7jwgpxgqw46hrxj6-3500.preview.app.github.dev/callback",
+    AccountReference: "Company X",
+    TransactionDesc: "Payment of Service",
   };
   try {
     response = await axios({
@@ -35,7 +35,17 @@ const post = async (req, res) => {
         "Content-Type": "application/json",
       },
     });
-    res.status(response.status).json({ response: response.data });
+    if(response.status==200){
+        result["ID"]=response.data.CheckoutRequestID,
+        result["CustomerMessage"]= response.data.CustomerMessage,
+        result["ResponseCode"]= response.data.ResponseCode,
+        result["DateTime"]=createTime(),
+        result["Amount"]=Amount,
+        result["Phonenumber"]=PhoneNumber
+    }else{
+      result=response.data
+    }
+    res.status(response.status).json(result);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -45,7 +55,32 @@ const get = async (req, res) => {
   res.status(200).json({ message: "Stk push active" });
 };
 
+const callback = async (req, res) => {
+  const { Body } = req.body;
+  console.log("hello")
+    // try {
+    //   const response = await axios({
+    //     method: "Post",
+    //     url: process.env.TRANSACTION_URL,
+    //     data: req_data,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       userName: process.env.USERNAME,
+    //       accept: "*/*",
+    //       entityId: process.env.ENTITY_ID,
+    //     },
+    //   });
+    //   Reconciled = true;
+    //   insertPayment(req.body, Reconciled);
+    //   res.status(200).json({ message: "Transaction saved and reconciled" });
+    // } catch (err) {
+    //   insertPayment(req.body, Reconciled);
+    //   res.status(200).json({ message: "Transaction saved but not reconciled" });
+    // }
+};
+
 module.exports = {
   post,
   get,
+  callback
 };

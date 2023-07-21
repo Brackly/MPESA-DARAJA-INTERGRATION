@@ -2413,3 +2413,7 @@
 20230427	12:39:27	5d07f2d5-e4eb-4941-8aa1-4934780c9366	Error: ENOENT: no such file or directory, stat 'C:\Users\ADMIN\Desktop\bkm\emtech\mpesa_integration\views\404.html'
 20230427	12:39:27	e0c96750-7142-4dee-99ff-ceb183c14e4d	Error: ENOENT: no such file or directory, stat 'C:\Users\ADMIN\Desktop\bkm\emtech\mpesa_integration\views\404.html'
 20230427	13:31:13	981abd3a-d178-4dd2-adb7-81c4c56e45af	SyntaxError: Unexpected token = in JSON at position 18
+20230721	06:43:08	3e89213b-0644-46e5-8819-778e4ad17cc3	Error: Not allowed by CORS
+20230721	06:44:43	9594c048-e13f-4e81-82bf-f9d307cf972e	Error: Not allowed by CORS
+20230721	06:48:14	4b6e0490-0f2d-4539-bc79-f40297575f1b	Error: Not allowed by CORS
+20230721	06:50:38	eafef7ae-a909-4eb7-8414-68da2f6dfd71	Error: Not allowed by CORS

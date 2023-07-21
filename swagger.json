@@ -12,8 +12,8 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "schemes": ["http","https"],
-    "host": "brackly-bookish-space-barnacle-vjwxq5x44qqhxxxw-3500.preview.app.github.dev",
+    "schemes": ["https"],
+    "host": "brackly-supreme-goggles-7jwgpxgqw46hrxj6-3500.preview.app.github.dev",
     "basePath": "/",
     "paths" : {
         "/stkpush" : {
@@ -23,41 +23,6 @@
                 "produces": ["application/json"],
                 "consumes": ["application/json"],
                 "parameters": [
-                    {
-                        "in": "header",
-                        "name": "consumerkey",
-                        "description": "Consumer Key from the daraja Portal",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "header",
-                        "name": "password",
-                        "description": "Password from the Daraja Portal",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "header",
-                        "name": "timestamp",
-                        "description": "Timestamp from the Daraja Portal",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "header",
-                        "name": "consumersecret",
-                        "description": "Consumer Secret from the Daraja Portal",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "header",
-                        "name": "environment",
-                        "description": "The environment prod/dev",
-                        "required": true,
-                        "type": "string"
-                    },
                     {
                         "in": "body",
                         "name": "body",
@@ -255,26 +220,11 @@
         "stkPushBody": {
             "type": "object",
             "properties": {
-                "BusinessShortCode": {
-                    "type": "integer"
-                },
-                "TransactionType": {
-                    "type": "string"
-                },
                 "Amount": {
                     "type": "integer"
                 },
                 "PhoneNumber": {
                     "type": "integer"
-                },
-                "AccountReference": {
-                    "type": "string"
-                },
-                "callBackURL": {
-                    "type": "string"
-                },
-                "TransactionDesc": {
-                    "type": "string"
                 }
             }
         },
